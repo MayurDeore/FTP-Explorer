@@ -1,0 +1,19 @@
+/* styles.css */
+
+/* Add styles here to customize the appearance of your app */
+
+
+#ftp-viewer div {
+    display: flex;
+    padding: 5px;
+    flex-direction: column;
+}
+
+#ftp-viewer img {
+    max-height: 200px;
+    width: auto;
+}
+
+#ftp-viewer div:hover {
+    cursor: pointer;
+}
