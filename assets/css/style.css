@@ -1,0 +1,61 @@
+/* styles.css */
+
+/* Add styles here to customize the appearance of your app */
+#frm_ftpconnect {
+    height: auto;
+    margin-bottom: 10px;
+}
+#ftp-viewer{
+    height: 70vh;
+    overflow-y: scroll;
+}
+#list {
+    border: 1px solid #ccc;
+    height: 70vh;
+    overflow-y: scroll;
+}
+#list img {
+    width: auto;
+    height: 20px; 
+}
+#imagePreview img {
+    max-height: 70vh;
+    max-width: 100%;
+    width: auto;
+}
+#ftp-viewer ul {
+    list-style: none;
+}
+
+#ftp-viewer li {
+    padding: 1px 0px 1px 10px;
+}
+
+
+#ftp-viewer li:hover {
+    cursor: pointer;
+    background-color: #ccc;
+}
+
+#ftp-viewer li.active {
+    background-color: cornflowerblue;
+    color: white;
+}
+
+#ctxmenu {
+    position: fixed;
+    background: ghostwhite;
+    color: black;
+    cursor: pointer;
+    border: 1px black solid
+}
+
+#ctxmenu>a {
+    padding: 0 1rem;
+    margin: 0
+}
+
+#ctxmenu>a:hover {
+    background: rgb(153, 219, 243);
+    color: ghostwhite
+}

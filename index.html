@@ -3,55 +3,48 @@
 
 <head>
   <meta charset="UTF-8">
-  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-  <!-- <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'"> -->
-  <link href="./assets/css/styles.css" rel="stylesheet">
   <link rel="stylesheet" />
-  <title>Hello World!</title>
+  <title>FTP Explorer</title>
+  <link href="./assets/css/style.css" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/bootstrap/bootstrap.min.css" />
   <script>let $ = require('jquery');</script>
-  <script>require('popper.js');</script>
-  <script>require('bootstrap');</script>
 </head>
 
 <body>
   FTP Explorer 2
   <form id="frm_ftpconnect">
     <div class="row">
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-3 col-sm-6">
         <label>Host:</label>
         <input class="form-control" type="text" placeholder="Enter Host" name="host" value="192.168.0.101" />
       </div>
-      <div class="form-group  col-md-3">
+      <div class="form-group  col-md-3 col-sm-6">
         <label>Port:</label>
         <input class="form-control" type="text" placeholder="Enter Port" name="port" value="2221" />
       </div>
-      <div class="form-group  col-md-3">
+      <div class="form-group  col-md-3 col-sm-6">
         <label>Username:</label>
         <input class="form-control" type="text" placeholder="Enter User" name="user" value="android" />
       </div>
-      <div class="form-group  col-md-3">
+      <div class="form-group  col-md-3 col-sm-6">
         <label>Password:</label>
         <input class="form-control" type="text" placeholder="Enter Password" name="pass" value="1234" />
       </div>
       <br />
       <div class="row">
-        <input class="btn btn-primary col-md-4" type="submit" value="Connect" />
-        <input type="button" class="btn btn-success col-md-4" id="btn_status" value="Get Status" />
-        <input type="button" class="btn btn-warning col-md-4" id="btn_disconnect" value="Disconnect" />
+        <input class="btn btn-primary col-sm-4" type="submit" value="Connect" />
+        <input type="button" class="btn btn-success col-sm-4" id="btn_status" value="Get Status" />
+        <input type="button" class="btn btn-warning col-sm-4" id="btn_disconnect" value="Disconnect" />
       </div>
     </div>
   </form>
 
-
-
-  <div class="container">
-    <div id="ftp-viewer" class="row">
-      
+  <div class="row" id="ftp-viewer">
+    <div id="list" class="col-md-6">
+      <ul></ul>
     </div>
+    <div id="imagePreview" class="col-md-6"></div>
   </div>
-
   <script src="./renderer.js"></script>
 </body>
 
