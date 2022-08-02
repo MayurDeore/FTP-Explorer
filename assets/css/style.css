@@ -5,24 +5,33 @@
     height: auto;
     margin-bottom: 10px;
 }
-#ftp-viewer{
+
+#ftp-viewer {
     height: 70vh;
     overflow-y: scroll;
 }
+
 #list {
     border: 1px solid #ccc;
     height: 70vh;
     overflow-y: scroll;
 }
+
 #list img {
     width: auto;
-    height: 20px; 
+    height: 20px;
 }
-#imagePreview img {
+
+#imagePreview {
     max-height: 70vh;
+    overflow: auto;
+}
+
+#imagePreview img {
     max-width: 100%;
     width: auto;
 }
+
 #ftp-viewer ul {
     list-style: none;
 }
