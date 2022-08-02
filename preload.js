@@ -3,6 +3,7 @@
 // import { FILE_TYPE_EXTENSION, FILE_TYPE } from './enum/FileType';
 
 var Client = require('ftp');
+var mammoth = require("mammoth");
 var { FILE_TYPE, FILE_TYPE_EXTENSION } = require('./enum/FileType');
 
 var c = new Client();
@@ -103,12 +104,13 @@ function getFile(element) {
   }
   let filePath = element.getAttribute('data-path');
   let fileType = element.getAttribute('data-file-type');
+  $("#imagePreview").html("<center><img src='./assets/img/loader.gif'></img></center>")
   c.get(filePath, (error, fileStream) => {
     if (error) throw error;
-    $("#imagePreview").html('');
     var buffer = [];
     fileStream.on('data', (chunks) => { buffer.push(chunks) });
     fileStream.on('end', function () {
+      $("#imagePreview").html('');
       var imageBuffer = Buffer.concat(buffer);
       if (fileType == FILE_TYPE.IMAGE) {
         let imageSrc = `data:image/png;base64,${imageBuffer.toString('base64')}`;
@@ -120,7 +122,18 @@ function getFile(element) {
         const url = URL.createObjectURL(blob);
         $("#imagePreview").append('<iframe width="95%" height="95%"></iframe>')
         $("#imagePreview iframe").attr("src", url);
+        return;
       }
+      if (fileType == FILE_TYPE.DOC) {
+        mammoth.convertToHtml({ buffer: imageBuffer })
+          .then(res => {
+            var html = res.value;
+            $("#imagePreview").html(html);
+          })
+
+        return;
+      }
+      $("#imagePreview").html("No preview");
 
     });
   })
@@ -178,7 +191,7 @@ function getFileType(fileName) {
   return FILE_TYPE.OTHER;
 }
 function hasExtension(fileName, exts) {
-  return (new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$')).test(fileName);
+  return (new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$')).test(fileName.toLowerCase());
 }
 
 window.addEventListener('DOMContentLoaded', () => {
