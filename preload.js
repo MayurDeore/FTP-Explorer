@@ -5,6 +5,7 @@
 var Client = require('ftp');
 var mammoth = require("mammoth");
 var { FILE_TYPE, FILE_TYPE_EXTENSION } = require('./enum/FileType');
+var fs = require("fs");
 
 var c = new Client();
 c.on('ready', () => {
@@ -246,7 +247,39 @@ document.onclick = (e) => {
         viewDirectory(path);
         return;
       case "action-download":
+        downloadFile(path);
+        return;
     }
   }
 
+}
+
+
+
+function downloadFile(filePath) {
+  c.get(filePath, (error, fileStream) => {
+    if (error) throw error;
+
+    var buffer = [];
+    fileStream.on('data', (chunks) => { buffer.push(chunks) });
+    fileStream.on('end', function () {
+      var imageBuffer = Buffer.concat(buffer);
+      let fileName = filePath.substr(filePath.lastIndexOf('/') + 1);
+      fs = require('fs');
+      const blob = new Blob([imageBuffer]);
+      const url = URL.createObjectURL(blob);
+      saveFile(fileName,url);
+    });
+  })
+}
+
+function saveFile(fileName,urlFile){
+  let a = document.createElement("a");
+  a.style = "display: none";
+  document.body.appendChild(a);
+  a.href = urlFile;
+  a.download = fileName;
+  a.click();
+  window.URL.revokeObjectURL(urlFile);
+  a.remove();
 }
